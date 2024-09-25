@@ -6,36 +6,30 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Colours {
-
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
-
     // Get the number of names and colors
     int numNames = getPositiveInteger(scanner, "Enter the number of names and colors: ");
-
     List<String> names = new ArrayList<>();
     List<String> colors = new ArrayList<>();
-
     // Get the names
     System.out.println("Enter the names:");
     for (int i = 0; i < numNames; i++) {
       String name = getNonEmptyString(scanner, "Name " + (i + 1) + ": ");
       names.add(name);
     }
-
     // Get the colors
     System.out.println("Enter the colors:");
     for (int i = 0; i < numNames; i++) {
       String color = getNonEmptyString(scanner, "Color " + (i + 1) + ": ");
       colors.add(color);
     }
-
     // Shuffle the colors
     Collections.shuffle(colors);
-
     // Print the pairs
     for (int i = 0; i < numNames; i++) {
-      System.out.println(names.get(i) + " - " + colors.get(i));
+      String colorDescription = getColorDescription(colors.get(i));
+      System.out.println(names.get(i) + " - " + colors.get(i) + ": " + colorDescription);
     }
   }
 
@@ -68,6 +62,22 @@ public class Colours {
       } else {
         System.out.println("Please enter a non-empty string.");
       }
+    }
+  }
+
+  // Helper method to get a color description
+  private static String getColorDescription(String color) {
+    switch (color.toLowerCase()) {
+      case "red":
+        return "You are fury";
+      case "yellow":
+        return "You are golden";
+      case "white":
+        return "You are angelic";
+      case "black":
+        return "you are bold";
+      default:
+        return "I can't figure you out";
     }
   }
 }
